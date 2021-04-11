@@ -6,7 +6,7 @@
           class="d-flex justify-center"
           cols="12"
           sm="6"
-          v-for="(bio, index) in bios"
+          v-for="(bio, index) in allBios"
           :key="index"
         >
           <bio :bio="bio" />
@@ -18,35 +18,20 @@
 
 <script>
 import Bio from "../Bio";
-import axios from "axios";
+import { mapActions, mapGetters } from "vuex";
+
 export default {
   components: {
     Bio,
   },
-  data: () => ({
-    bios: [
-      {
-        name: "Aaron Witt",
-        position: "Founder/ Co-Owner",
-        avatar: "aaron.jpg",
-      },
-      {
-        name: "Bilal Powell",
-        position: "Co-Owner",
-        avatar: "bilal.jpg",
-      },
-      {
-        name: "Kelsey Witt",
-        tipositiontle: '"New Home" Consultant / Designer',
-        avatar: "kelsey.jpg",
-      },
-      {
-        name: "Jessi Powell",
-        position: '"New Home" Consultant / Designer',
-        avatar: "jessie.jpg",
-      },
-    ],
-  }),
+  data: () => ({}),
+  methods: {
+    ...mapActions(["fetchBios"]),
+  },
+  computed: { ...mapGetters(["allBios"]) },
+  created() {
+    this.fetchBios();
+  },
 };
 </script>
 

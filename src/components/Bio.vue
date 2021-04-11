@@ -10,7 +10,7 @@
         </v-col>
 
         <v-col cols="12" class=" text-center">
-          <div class="text-h4">{{ bio.name }}</div>
+          <div class="text-h4">{{ bio.user.name }}</div>
           <div class="text-h6 primary--text">{{ bio.position }}</div>
         </v-col>
       </v-row>

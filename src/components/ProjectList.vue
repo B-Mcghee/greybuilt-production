@@ -6,7 +6,7 @@
         :key="index"
         cols="12"
         sm="6"
-        lg="4"
+        md="4"
         ><div>
           <v-hover v-slot="{ hover }">
             <v-card
@@ -16,7 +16,7 @@
               :to="{ name: 'ProjectItem', params: { id: project.id } }"
             >
               <v-img
-                :src="require(`../assets/${project.cover_image}`)"
+                :src="require(`../assets/${project.coverImage}`)"
                 aspect-ratio="1"
                 ><v-expand-transition>
                   <div

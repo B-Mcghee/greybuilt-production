@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div v-if="isLoaded">
     <v-container>
       <v-row>
         <v-col cols="12">
@@ -46,60 +46,32 @@
         </v-col>
       </v-row>
     </v-container>
-
-    <!-- <v-hover v-slot="{ hover }">
-      <v-card
-        max-width="600px"
-        :elevation="hover ? 12 : 2"
-        :class="{ 'on-hover': hover }"
-        :to="{ name: 'ProjectItem' }"
-      >
-        <v-img
-          :src="require(`../assets/${project.cover_image}`)"
-          aspect-ratio="1"
-          ><v-expand-transition>
-            <div
-              v-if="hover"
-              class="d-flex transition-fast-in-fast-out lightPrimary v-card--revea overlay justify-center text-h2 darkestPrimary--text align-center"
-              style="height: 100%;"
-            >
-              {{ project.title }}
-            </div>
-          </v-expand-transition></v-img
-        >
-      </v-card>
-    </v-hover> -->
   </div>
 </template>
 
 <script>
+import { mapGetters } from "vuex";
 export default {
-  // props: {
-  //   project: {
-  //     type: Object,
-  //   },
-  // },
   data: () => ({
-    overlay: false,
-    model: 0,
-    colors: ["primary", "secondary", "yellow darken-2", "red", "orange"],
-    project: {
-      id: 1,
-      title: "Corydon",
-      description:
-        "This project holds dear to Greybuilt, because it was the first opportunity someone trusted us in building their dream home and we couldn't be more proud",
-      cover_image: "Home.jpg",
-      images: ["forsale.jpg", "Home.jpg", "side.jpg"],
-      sq_footage: "1,456",
-      bedrooms: "4",
-      bathrooms: "1.5",
-      showProject: true,
-    },
+    project: undefined,
+    isLoaded: false,
   }),
+  mounted() {
+    this.findProject();
+  },
   methods: {
-    showPic(image) {
-      console.log(image);
+    findProject() {
+      this.allProjects.filter((p) => {
+        if (p.id == this.$route.params.id) {
+          this.project = p;
+        }
+      });
+      this.isLoaded = true;
+      return this.project;
     },
+  },
+  computed: {
+    ...mapGetters(["allProjects"]),
   },
 };
 </script>
